@@ -1,18 +1,24 @@
 <template>
   <div>
-    <p><input type="url" v-model="currentPath" id="path" readonly /></p>
+    <p><el-input type="url" v-model="currentPath" id="path" readonly /></p>
   </div>
   <div>
     <p />
-    <p><label for="content">Content:</label></p>
+    <p><el-text for="content">当前剪切板内容</el-text></p>
   </div>
   <div>
     <p>
-      <textarea minlength="100" maxlength="1920" type="text"
+      <el-input
+        type="textarea"
+        minlength="100"
+        maxlength="1920"
         v-model="content"
         id="dynamic_content"
         readonly
+        autosize
+        resize="none"
       />
+      <el-button type="primary" :icon="CopyDocument" @click="copyToClipboard"></el-button>
     </p>
   </div>
 </template>
@@ -21,7 +27,7 @@
 import { ref, onMounted } from 'vue'
 import axios from 'axios'
 import { useRoute } from 'vue-router'
-
+import { CopyDocument } from '@element-plus/icons-vue'
 const route = useRoute()
 const currentPath = ref(window.location.href)
 const content = ref('')
@@ -52,13 +58,17 @@ onMounted(() => {
     console.error('Invalid bin_id format')
   }
 })
+
+const copyToClipboard = () => {
+  navigator.clipboard
+    .writeText(content.value)
+    .then(() => {
+      alert('Text copied to clipboard!')
+    })
+    .catch((err) => {
+      console.error('Failed to copy text: ', err)
+    })
+}
 </script>
 
-<style scoped>
-.dynamic_content {
-  width: 100%;
-  max-width: 1920px;
-  min-width: 100px;
-  box-sizing: border-box; /* Include padding and border in the element's total width and height */
-}
-</style>
+<style scoped></style>

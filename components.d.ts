@@ -8,6 +8,13 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     BinPage: typeof import('./src/components/BinPage.vue')['default']
+    ElButton: typeof import('element-plus/es')['ElButton']
+    ElFlex: typeof import('element-plus/es')['ElFlex']
+    ElForm: typeof import('element-plus/es')['ElForm']
+    ElInput: typeof import('element-plus/es')['ElInput']
+    ElLabel: typeof import('element-plus/es')['ElLabel']
+    ElText: typeof import('element-plus/es')['ElText']
+    ElTextarea: typeof import('element-plus/es')['ElTextarea']
     IconCommunity: typeof import('./src/components/icons/IconCommunity.vue')['default']
     IconDocumentation: typeof import('./src/components/icons/IconDocumentation.vue')['default']
     IconEcosystem: typeof import('./src/components/icons/IconEcosystem.vue')['default']

@@ -1,12 +1,13 @@
 <template>
     <div>
-      <form @submit.prevent="handleSubmit">
-        <label for="content">Content:</label>
-        <input type="text" v-model="content" id="content" required />
-        <button type="submit">Submit</button>
-      </form>
-      <div v-if="id">
-        <p>Received ID: {{ id }}</p>
+      <el-form >
+        <el-text for="content">输入粘贴板内容: </el-text>
+        <el-input type="text" v-model="content" id="content" required />
+        <el-button type="primary" @click="handleSubmit" >Submit</el-button>
+      </el-form>
+      <div v-if="returnedContent">
+        <p>链接: {{ id }}</p>
+        <el-input v-model="returnedContent" type="url" id="id" readonly/>
       </div>
     </div>
   </template>
@@ -14,7 +15,7 @@
   <script setup lang="ts">
   import { ref } from 'vue';
   import axios from 'axios';
-  
+  const returnedContent = ref('');
   const content = ref<string>('');
   const id = ref<string>('');
   
@@ -29,7 +30,8 @@
         // 'Authorization': 'Bearer your-token-here'
       }}
     );
-      id.value = response.data.id;
+    const baseUrl = window.location.origin;
+    returnedContent.value =  `${baseUrl}/${response.data.id}`;
     } catch (error) {
       console.error('There was an error!', error);
     }
