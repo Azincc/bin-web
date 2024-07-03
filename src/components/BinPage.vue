@@ -1,5 +1,6 @@
 <template>
   <div>
+    <el-text id="nowPath" v-model="nowPath"></el-text>
     <p><el-input type="url" v-model="currentPath" id="path" readonly /></p>
   </div>
   <div>
@@ -29,6 +30,7 @@ import axios from 'axios'
 import { useRoute } from 'vue-router'
 import { CopyDocument } from '@element-plus/icons-vue'
 const route = useRoute()
+const nowPath= ref(window.location.href)
 const currentPath = ref(window.location.href)
 const content = ref('')
 const contentInput = ref<HTMLTextAreaElement | null>(null)
