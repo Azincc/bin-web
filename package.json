@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "run-p type-check \"build-only {@}\" --",
     "preview": "vite preview",
-    "build-only": "vite build",
+    "build-only": "cross-env NODE_OPTIONS=--max-old-space-size=4000 && vite build",
     "type-check": "vue-tsc --build --force",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
     "format": "prettier --write src/"
@@ -15,7 +15,9 @@
   "dependencies": {
     "@types/vue": "^2.0.0",
     "axios": "^1.7.2",
+    "cross-env": "^7.0.3",
     "element-plus": "^2.7.6",
+    "run-p": "^0.0.0",
     "vue": "^3.4.29",
     "vue-router": "^4.3.3"
   },
