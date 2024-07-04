@@ -20,7 +20,7 @@ RUN npm run build
 FROM nginx:1.21-alpine as production-stage
 
 # 复制自定义的 Nginx 配置文件
-COPY ./.build/nginx.conf /etc/nginx/conf.d/default.conf
+COPY ./nginx.conf /etc/nginx/conf.d/default.conf
 
 # 复制构建后的文件到 Nginx 服务目录
 COPY --from=build-stage /app/dist /usr/share/nginx/html
