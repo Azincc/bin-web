@@ -15,6 +15,8 @@ declare module 'vue' {
     ElLabel: typeof import('element-plus/es')['ElLabel']
     ElText: typeof import('element-plus/es')['ElText']
     ElTextarea: typeof import('element-plus/es')['ElTextarea']
+    Home: typeof import('./src/components/Home.vue')['default']
+    HomePage: typeof import('./src/components/HomePage.vue')['default']
     IconCommunity: typeof import('./src/components/icons/IconCommunity.vue')['default']
     IconDocumentation: typeof import('./src/components/icons/IconDocumentation.vue')['default']
     IconEcosystem: typeof import('./src/components/icons/IconEcosystem.vue')['default']

@@ -8,22 +8,31 @@ import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 import vueDevTools from 'vite-plugin-vue-devtools'
-// https://vitejs.dev/config/
+import autoImportPlugin from '@opentiny/unplugin-tiny-vue' // 改为 /vite 以正确引入 Vite 专用版本
 export default defineConfig({
   plugins: [
     AutoImport({
-    resolvers: [ElementPlusResolver()],
-  }),
-  Components({
-    resolvers: [ElementPlusResolver()],
-  }),
+      resolvers: [ElementPlusResolver()],
+    }),
+    Components({
+      resolvers: [ElementPlusResolver()],
+    }),
     vue(),
     vueJsx(),
-    vueDevTools()
+    vueDevTools(),
+    autoImportPlugin('vite')
   ],
+  define: {
+    'process.env': { ...process.env }
+  },
   resolve: {
-    alias: {
-      '@': fileURLToPath(new URL('./src', import.meta.url))
-    }
+    alias: [
+      // XDesign 主题
+      {
+        find: /\@opentiny\/vue-theme\/(?!(infinity))/,
+        replacement: '@opentiny/vue-theme/infinity-theme/'
+      }
+    ]
   }
 })
+

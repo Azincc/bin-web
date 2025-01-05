@@ -1,7 +1,8 @@
 <template>
   <div>
-    <el-text id="nowPath" v-model="nowPath"></el-text>
-    <p><el-input type="url" v-model="currentPath" id="path" readonly /></p>
+    <p>
+    <tiny-input type="url" v-model="currentPath" id="path" disabled></tiny-input>
+    </p>
   </div>
   <div>
     <p />
@@ -9,17 +10,8 @@
   </div>
   <div>
     <p>
-      <el-input
-        type="textarea"
-        minlength="100"
-        maxlength="1920"
-        v-model="content"
-        id="dynamic_content"
-        readonly
-        autosize
-        resize="none"
-      />
-      <el-button type="primary" :icon="CopyDocument" @click="copyToClipboard"></el-button>
+      <tiny-input type="textarea" disabled v-model="content" placeholder="textarea"></tiny-input>
+      <tiny-button type="primary" @click="copyToClipboard">复制</tiny-button>
     </p>
   </div>
 </template>
@@ -29,11 +21,25 @@ import { ref, onMounted } from 'vue'
 import axios from 'axios'
 import { useRoute } from 'vue-router'
 import { CopyDocument } from '@element-plus/icons-vue'
+import {
+  Form as TinyForm,
+  FormItem as TinyFormItem,
+  Numeric as TinyNumeric,
+  Radio as TinyRadio,
+  DatePicker as TinyDatePicker,
+  DropTimes as TinyDropTimes,
+  Tooltip as TinyTooltip,
+  Input as TinyInput,
+  Button as TinyButton, Modal, Notify,
+  Modal as TinyModal,
+  Row as TinyRow
+} from '@opentiny/vue'
 const route = useRoute()
 const nowPath= ref(window.location.href)
 const currentPath = ref(window.location.href)
 const content = ref('')
 const contentInput = ref<HTMLTextAreaElement | null>(null)
+const apiUrl=import.meta.env.VITE_API_ENDPOINT
 const adjustTextareaHeight = () => {
   const textarea = contentInput.value
   if (textarea) {
@@ -44,7 +50,7 @@ const adjustTextareaHeight = () => {
 }
 const fetchContent = async (bin_id: string) => {
   try {
-    const response = await axios.get(`http://127.0.0.1:8080/v1/bin/get/${bin_id}`)
+    const response = await axios.get(apiUrl+'/v1/bin/get/'+`${bin_id}`)
     content.value = response.data.content
     adjustTextareaHeight()
   } catch (error) {
@@ -65,10 +71,10 @@ const copyToClipboard = () => {
   navigator.clipboard
     .writeText(content.value)
     .then(() => {
-      alert('Text copied to clipboard!')
+      alert('复制成功!')
     })
     .catch((err) => {
-      console.error('Failed to copy text: ', err)
+      console.error('无法复制! 错误:', err)
     })
 }
 </script>
