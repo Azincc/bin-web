@@ -24,15 +24,6 @@ export default defineConfig({
   ],
   define: {
     'process.env': { ...process.env }
-  },
-  resolve: {
-    alias: [
-      // XDesign 主题
-      {
-        find: /\@opentiny\/vue-theme\/(?!(infinity))/,
-        replacement: '@opentiny/vue-theme/infinity-theme/'
-      }
-    ]
   }
 })
 

@@ -14,20 +14,20 @@
   },
   "dependencies": {
     "@opentiny/vue": "3",
+    "@opentiny/vue-theme": "^3.20.1",
     "@types/vue": "^2.0.0",
     "axios": "^1.7.2",
     "cross-env": "^7.0.3",
     "dotenv": "^16.4.5",
     "element-plus": "^2.7.6",
     "run-p": "^0.0.0",
-    "vue": "^3.4.29",
     "vue-router": "^4.3.3"
   },
   "devDependencies": {
     "@opentiny/unplugin-tiny-vue": "^0.0.2",
     "@rushstack/eslint-patch": "^1.8.0",
     "@tsconfig/node20": "^20.1.4",
-    "@types/node": "^20.14.5",
+    "@types/node": "^20.17.11",
     "@vitejs/plugin-vue": "^5.0.5",
     "@vitejs/plugin-vue-jsx": "^4.0.0",
     "@vue/eslint-config-prettier": "^9.0.0",
@@ -43,6 +43,7 @@
     "unplugin-vue-components": "^0.27.4",
     "vite": "^5.4.9",
     "vite-plugin-vue-devtools": "^7.3.1",
+    "vue": "^3.5.13",
     "vue-tsc": "^2.0.21"
   }
 }
